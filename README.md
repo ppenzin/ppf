@@ -15,7 +15,7 @@ To build, checkout llvm and then checkout PPF repository into its tools subdirec
 ```
 $ git clone https://github.com/llvm-mirror/llvm.git
 $ cd llvm/tools
-$ git clone https://FIXME
+$ git clone https://github.com/ppenzin/ppf.git
 ```
 
 ```

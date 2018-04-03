@@ -207,31 +207,36 @@ set(LIBPPF_LIBRARY_VERSION
     "Version number that will be placed into the libppf library , in the form XX.YY")
 mark_as_advanced(PPF_EXECUTABLE_VERSION LIBPPF_LIBRARY_VERSION)
 
-add_subdirectory(utils/TableGen)
+# FIXME reenable
+# add_subdirectory(utils/TableGen)
 
-add_subdirectory(include)
+# FIXME reenable
+# add_subdirectory(include)
 
 # All targets below may depend on all tablegen'd files
 get_property(PPF_TABLEGEN_TARGETS GLOBAL PROPERTY PPF_TABLEGEN_TARGETS)
 list(APPEND LLVM_COMMON_DEPENDS ${PPF_TABLEGEN_TARGETS})
 
-add_subdirectory(lib)
-add_subdirectory(tools)
+# FIXME reenable
+# add_subdirectory(lib)
+# FIXME reenable
+# add_subdirectory(tools)
 
-if( LLVM_INCLUDE_TESTS )
-  add_subdirectory(unittests)
-  list(APPEND PPF_TEST_DEPS ppfUnitTests)
-    list(APPEND PPF_TEST_PARAMS
-      ppf_unit_site_config=${CMAKE_CURRENT_BINARY_DIR}/test/Unit/lit.site.cfg
-      )
-  add_subdirectory(test)
-endif()
+# FIXME reenable
+# if( LLVM_INCLUDE_TESTS )
+#   add_subdirectory(unittests)
+#   list(APPEND PPF_TEST_DEPS ppfUnitTests)
+#     list(APPEND PPF_TEST_PARAMS
+#       ppf_unit_site_config=${CMAKE_CURRENT_BINARY_DIR}/test/Unit/lit.site.cfg
+#       )
+#   add_subdirectory(test)
+# endif()
 
-option(PPF_INCLUDE_DOCS "Generate build targets for the ppf docs."
-  ${LLVM_INCLUDE_DOCS})
-if( PPF_INCLUDE_DOCS )
-  add_subdirectory(docs)
-endif()
+# FIXME reenable
+# option(PPF_INCLUDE_DOCS "Generate build targets for the ppf docs." ${LLVM_INCLUDE_DOCS})
+# if( PPF_INCLUDE_DOCS )
+#   add_subdirectory(docs)
+# endif()
 
 # Workaround for MSVS10 to avoid the Dialog Hell
 # FIXME: This could be removed with future version of CMake.
@@ -242,6 +247,6 @@ if( PPF_BUILT_STANDALONE AND MSVC_VERSION EQUAL 1600 )
   endif()
 endif()
 
-set(BUG_REPORT_URL "http://FIXME" CACHE STRING
+set(BUG_REPORT_URL "https://github.com/ppenzin/ppf/issues" CACHE STRING
   "Default URL where bug reports are to be submitted.")
 
