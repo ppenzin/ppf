@@ -1,14 +1,16 @@
 PPF - P4 Packet Filter
 ======================
 
-How hard would it be to implement P4 frontend from scratch? P4 has very simple
-syntax ([P4 16][p4-16] in particular). We would use official [LLVM tutorial][t]
-('Kaleidoscope' use case).
+How hard would it be to implement P4 frontend from scratch? P4 is a
+domain-specific language with very simple syntax ([P4 16][p4-16] in
+particular). We would use official [LLVM tutorial][t] ('Kaleidoscope' use
+case).
 
 Limitations:
 
 - No standalone builds (to do)
 - No preprocessor support yet (next iteration)
+- No driver yet (next iteration)
 
 To build, checkout llvm and then checkout PPF repository into its tools subdirectory:
 
