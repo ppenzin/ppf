@@ -210,8 +210,7 @@ mark_as_advanced(PPF_EXECUTABLE_VERSION LIBPPF_LIBRARY_VERSION)
 # FIXME reenable
 # add_subdirectory(utils/TableGen)
 
-# FIXME reenable
-# add_subdirectory(include)
+add_subdirectory(include)
 
 # All targets below may depend on all tablegen'd files
 get_property(PPF_TABLEGEN_TARGETS GLOBAL PROPERTY PPF_TABLEGEN_TARGETS)
@@ -219,8 +218,7 @@ list(APPEND LLVM_COMMON_DEPENDS ${PPF_TABLEGEN_TARGETS})
 
 # FIXME reenable
 # add_subdirectory(lib)
-# FIXME reenable
-# add_subdirectory(tools)
+add_subdirectory(tools)
 
 # FIXME reenable
 # if( LLVM_INCLUDE_TESTS )
