@@ -25,13 +25,7 @@ namespace options {
 /// Flags specifically for ppf options.  Must not overlap with
 /// llvm::opt::DriverFlag.
 enum PPFFlags {
-  DriverOption = (1 << 4),
-  LinkerInput = (1 << 5),
-  NoArgumentUnused = (1 << 6),
-  Unsupported = (1 << 7),
-  PPF1Option = (1 << 10),
-  NoDriverOption = (1 << 12),
-  Ignored = (1 << 13)
+  WorkflowOption = (1 << 4),
 };
 
 enum ID {
@@ -45,7 +39,7 @@ enum ID {
 };
 } // namespace options
 
-std::unique_ptr<llvm::opt::OptTable> createDriverOptTable();
+std::unique_ptr<llvm::opt::OptTable> createCmdOptTable();
 } // namespace driver
 } // namespace ppf
 

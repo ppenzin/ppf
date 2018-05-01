@@ -152,7 +152,7 @@ macro(add_ppf_library name)
   else()
     set(libkind)
   endif()
-  add_library( ${name} ${libkind} ${srcs} )
+  llvm_add_library( ${name} ${libkind} ${srcs} )
   llvm_update_compile_flags(${name} ${srcs})
   if( LLVM_COMMON_DEPENDS )
     add_dependencies( ${name} ${LLVM_COMMON_DEPENDS} )
@@ -216,8 +216,7 @@ add_subdirectory(include)
 get_property(PPF_TABLEGEN_TARGETS GLOBAL PROPERTY PPF_TABLEGEN_TARGETS)
 list(APPEND LLVM_COMMON_DEPENDS ${PPF_TABLEGEN_TARGETS})
 
-# FIXME reenable
-# add_subdirectory(lib)
+add_subdirectory(lib)
 add_subdirectory(tools)
 
 # FIXME reenable

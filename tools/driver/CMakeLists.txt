@@ -16,6 +16,11 @@ add_ppf_executable(ppf
   PPFDriverOptions
   )
 
+target_link_libraries(ppf
+  PRIVATE
+  ppfDriver
+  )
+
 set_target_properties(ppf PROPERTIES VERSION ${PPF_EXECUTABLE_VERSION})
 
 if(UNIX)
