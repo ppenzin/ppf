@@ -25,8 +25,11 @@ using namespace ppf;
 using namespace ppf::driver;
 using namespace llvm::opt;
 
+static void ProcessInput(const char *Input, InputArgList &Args);
+
 int
 main(int argc_, const char **argv_) {
+  const char *Input = nullptr;
   SmallVector<const char *, 256> argv(argv_, argv_ + argc_);
 
   std::unique_ptr<OptTable> Opts(createCmdOptTable());
@@ -35,6 +38,24 @@ main(int argc_, const char **argv_) {
   InputArgList Args =
       Opts->ParseArgs(argvRef.slice(1), MissingArgIndex, MissingArgCount);
 
-  std::cout << "Work in progress!" << std::endl;
+  // Find inputs
+  for (auto A : Args) {
+    if (A->getOption().getKind() == Option::InputClass) {
+      // Can only have one input
+      if (Input) {
+        std::cerr << "#### Need an error: can only have one input\n";
+        return 1;
+      }
+      Input = A->getValue();
+    }
+  }
+
+  ProcessInput(Input, Args);
+
   return 0;
+}
+
+/// Compile a P4 file
+static void ProcessInput(const char *Input, InputArgList &Args) {
+  std::cout << "Work in progress\n";
 }
