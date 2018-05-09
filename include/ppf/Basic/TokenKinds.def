@@ -20,8 +20,6 @@
 #ifndef KEYWORD
 #define KEYWORD(X,Y) TOK(kw_ ## X)
 #endif
-#ifndef FORMAT_SPEC
-#define FORMAT_SPEC(X, Y) TOK(fs_ ## X)
 #endif
 #ifndef OPERATOR
 #define OPERATOR(X,Y) TOK(kw_ ## X)
@@ -56,3 +54,7 @@ KEYWORD(ACTION                 , KEYALL)
 KEYWORD(CONTROL                , KEYALL)
 KEYWORD(TABLE                  , KEYALL)
 
+// [FIXME]: Punctuators
+
+TOK(l_brace)             // {
+TOK(r_brace)             // }
