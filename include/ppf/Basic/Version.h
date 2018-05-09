@@ -1,4 +1,4 @@
-//===- Version.h - Fort Version Number -------------------------*- C++ -*-===//
+//===- Version.h - PPF Version Number -------------------------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
@@ -9,54 +9,54 @@
 ///
 /// \file
 /// \brief Defines version macros and version-related utility functions
-/// for Fort.
+/// for PPF.
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef LLVM_FORT_BASIC_VERSION_H
-#define LLVM_FORT_BASIC_VERSION_H
+#ifndef LLVM_PPF_BASIC_VERSION_H
+#define LLVM_PPF_BASIC_VERSION_H
 
-#include "fort/Basic/Version.inc"
+#include "ppf/Basic/Version.inc"
 #include "llvm/ADT/StringRef.h"
 
-namespace fort {
+namespace ppf {
 /// \brief Retrieves the repository path (e.g., Subversion path) that
-/// identifies the particular Fort branch, tag, or trunk from which this
-/// Fort was built.
-std::string getFortRepositoryPath();
+/// identifies the particular PPF branch, tag, or trunk from which this
+/// PPF was built.
+std::string getPPFRepositoryPath();
 
 /// \brief Retrieves the repository path from which LLVM was built.
 ///
-/// This supports LLVM residing in a separate repository from fort.
+/// This supports LLVM residing in a separate repository from ppf.
 std::string getLLVMRepositoryPath();
 
 /// \brief Retrieves the repository revision number (or identifer) from which
-/// this Fort was built.
-std::string getFortRevision();
+/// this PPF was built.
+std::string getPPFRevision();
 
 /// \brief Retrieves the repository revision number (or identifer) from which
 /// LLVM was built.
 ///
-/// If Fort and LLVM are in the same repository, this returns the same
-/// string as getFortRevision.
+/// If PPF and LLVM are in the same repository, this returns the same
+/// string as getPPFRevision.
 std::string getLLVMRevision();
 
 /// \brief Retrieves the full repository version that is an amalgamation of
-/// the information in getFortRepositoryPath() and getFortRevision().
-std::string getFortFullRepositoryVersion();
+/// the information in getPPFRepositoryPath() and getPPFRevision().
+std::string getPPFFullRepositoryVersion();
 
-/// \brief Retrieves a string representing the complete fort version,
-/// which includes the fort version number, the repository version,
+/// \brief Retrieves a string representing the complete ppf version,
+/// which includes the ppf version number, the repository version,
 /// and the vendor tag.
-std::string getFortFullVersion();
+std::string getPPFFullVersion();
 
-/// \brief Like getFortFullVersion(), but with a custom tool name.
-std::string getFortToolFullVersion(llvm::StringRef ToolName);
+/// \brief Like getPPFFullVersion(), but with a custom tool name.
+std::string getPPFToolFullVersion(llvm::StringRef ToolName);
 
-/// \brief Retrieves a string representing the complete fort version suitable
-/// for use in the CPP __VERSION__ macro, which includes the fort version
+/// \brief Retrieves a string representing the complete ppf version suitable
+/// for use in the CPP __VERSION__ macro, which includes the ppf version
 /// number, the repository version, and the vendor tag.
-std::string getFortFullCPPVersion();
-} // namespace fort
+std::string getPPFFullCPPVersion();
+} // namespace ppf
 
-#endif // LLVM_FORT_BASIC_VERSION_H
+#endif // LLVM_PPF_BASIC_VERSION_H

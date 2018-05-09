@@ -20,6 +20,9 @@ include "llvm/Option/OptParser.td"
 // WorkflowOption - Options affecting compiler's workflow
 def WorkflowOption : OptionFlag;
 
+// DriverOption - Command line parsing options and utility output
+def DriverOption : OptionFlag;
+
 // A short name to show in documentation. The name will be interpreted as rST.
 class DocName<string name> { string DocName = name; }
 
@@ -32,7 +35,17 @@ class DocBrief<code descr> { code DocBrief = descr; }
 def Action_Group : OptionGroup<"<action group>">, DocName<"Actions">,
                    DocBrief<[{The action to perform on the input.}]>;
 
+def Help_Group : OptionGroup<"<help group>">, DocName<"Help">,
+                 DocBrief<[{Help output.}]>;
+
+/////////
+// Options
+
 def fsyntax_only : Flag<["-"], "fsyntax-only">,
   Flags<[WorkflowOption]>, Group<Action_Group>,
   HelpText<"Stop after checking syntax">;
+
+def help : Flag<["-", "--"], "help">,
+  Flags<[DriverOption, WorkflowOption]>, Group<Help_Group>,
+  HelpText<"Print help message and exit">; 
 

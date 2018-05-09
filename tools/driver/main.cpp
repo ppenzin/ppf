@@ -19,8 +19,6 @@
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/Process.h"
 
-#include<iostream>
-
 using namespace ppf;
 using namespace ppf::driver;
 using namespace llvm::opt;
@@ -38,17 +36,36 @@ main(int argc_, const char **argv_) {
   InputArgList Args =
       Opts->ParseArgs(argvRef.slice(1), MissingArgIndex, MissingArgCount);
 
+  // Need help message?
+  if (Args.hasArg(options::OPT_help)) {
+    Opts->PrintHelp(llvm::outs(), "ppf", "P4 compiler for Berkeley Packet Filter", 0, 0, false);
+    return 0;
+  }
+
+  bool HasErrors = false;
+
+  // Report invalid arguments
+  for (auto A : Args.filtered(options::OPT_UNKNOWN)) {
+    llvm::errs() << "unknown argument '" << A->getAsString(Args) << "'\n";
+    HasErrors = true;
+  }
+
   // Find inputs
   for (auto A : Args) {
     if (A->getOption().getKind() == Option::InputClass) {
       // Can only have one input
       if (Input) {
-        std::cerr << "#### Need an error: can only have one input\n";
+        // FIXME Diagnostics
+        llvm::errs() << "Can only have one input\n";
         return 1;
       }
       Input = A->getValue();
     }
   }
+
+  // Don't continue if there were any errors
+  if (HasErrors)
+    return 1;
 
   ProcessInput(Input, Args);
 
@@ -57,5 +74,5 @@ main(int argc_, const char **argv_) {
 
 /// Compile a P4 file
 static void ProcessInput(const char *Input, InputArgList &Args) {
-  std::cout << "Work in progress\n";
+  llvm::outs() << "Work in progress\n";
 }

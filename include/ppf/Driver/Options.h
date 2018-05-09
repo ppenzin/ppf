@@ -25,7 +25,8 @@ namespace options {
 /// Flags specifically for ppf options.  Must not overlap with
 /// llvm::opt::DriverFlag.
 enum PPFFlags {
-  WorkflowOption = (1 << 4),
+  DriverOption = (1 << 4),
+  WorkflowOption = (1 << 5),
 };
 
 enum ID {
