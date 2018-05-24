@@ -19,6 +19,7 @@ add_ppf_executable(ppf
 target_link_libraries(ppf
   PRIVATE
   ppfDriver
+  ppfParser
   )
 
 set_target_properties(ppf PROPERTIES VERSION ${PPF_EXECUTABLE_VERSION})

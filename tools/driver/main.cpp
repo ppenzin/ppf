@@ -13,17 +13,17 @@
 
 #include "ppf/Basic/LLVM.h"
 #include "ppf/Driver/Options.h"
-#include "llvm/ADT/SmallVector.h"
+#include "ppf/Parser/Parser.h"
 #include "llvm/Option/ArgList.h"
 #include "llvm/Option/OptTable.h"
 #include "llvm/Support/CommandLine.h"
 #include "llvm/Support/Process.h"
+#include "llvm/Support/SourceMgr.h"
 
+using namespace llvm;
+using namespace llvm::opt;
 using namespace ppf;
 using namespace ppf::driver;
-using namespace llvm::opt;
-
-static void ProcessInput(const char *Input, InputArgList &Args);
 
 int
 main(int argc_, const char **argv_) {
@@ -63,16 +63,30 @@ main(int argc_, const char **argv_) {
     }
   }
 
+  ErrorOr<std::unique_ptr<MemoryBuffer>> MBOrErr =
+      MemoryBuffer::getFileOrSTDIN(Input);
+  if (std::error_code EC = MBOrErr.getError()) {
+    llvm::errs() << "Could not open input file '" << Input
+                 << "': " << EC.message() << "\n";
+    HasErrors = true;
+  }
+
   // Don't continue if there were any errors
   if (HasErrors)
     return 1;
 
-  ProcessInput(Input, Args);
+  // Grab input memory buffer
+  std::unique_ptr<llvm::MemoryBuffer> MB = std::move(MBOrErr.get());
+
+  SourceMgr SrcMgr;
+  // TODO SrcMgr.setIncludeDirs(IncludeDirs)
+
+  // Tell SrcMgr about this buffer, which is what Parser will pick up.
+  SrcMgr.AddNewSourceBuffer(std::move(MB), llvm::SMLoc());
+
+  Parser P(SrcMgr);
+  P.ParseProgramUnits();
 
   return 0;
 }
 
-/// Compile a P4 file
-static void ProcessInput(const char *Input, InputArgList &Args) {
-  llvm::outs() << "Work in progress\n";
-}
